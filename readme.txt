@@ -9,37 +9,42 @@
 #  the Free Software Foundation; 
 #------------------------------------------------------
 
-Ò»¡¢Ê¹ÓÃ·½·¨£º
+ä¸€ã€ä½¿ç”¨æ–¹æ³•ï¼š
 
-ĞèÒªÊ¹ÓÃ¸Ã¹¦ÄÜµÄgit·şÎñÆ÷±ØĞëÔÚgit_serverÖĞ±»¼ÇÂ¼£¬·ñÔòÎŞ·¨Ê¹ÓÃdiffcount¡£
-git diffcountÊ¹ÓÃ·½·¨
-diffcount --git-post-receive ¨Cprocess ¨Cupdate ¨Cp ¨Cg ¨Cr ¨Cb -n
+éœ€è¦ä½¿ç”¨è¯¥åŠŸèƒ½çš„gitæœåŠ¡å™¨å¿…é¡»åœ¨git_serverä¸­è¢«è®°å½•ï¼Œå¦åˆ™æ— æ³•ä½¿ç”¨diffcountã€‚
+git diffcountä½¿ç”¨æ–¹æ³•
+diffcount --git-post-receive â€“process â€“update â€“p â€“g â€“r â€“b -n
  
     --git-post-recieve 
        git post recieve diff count
-	·¢ÆğÒ»´Î´úÂëÍ³¼Æ
+	å‘èµ·ä¸€æ¬¡ä»£ç ç»Ÿè®¡
    --process 
        show the git count process
    --update 
        repair git codecount
-	¸üĞÂÄ£Ê½£¬ÓÃÓÚÒ»Ğ©Òì³£Êı¾İµÄĞŞ¸´
+	æ›´æ–°æ¨¡å¼ï¼Œç”¨äºä¸€äº›å¼‚å¸¸æ•°æ®çš„ä¿®å¤
    -p (used with --git-post-recieve)
        repository's path
-	°æ±¾¿âÂ·¾¶(·şÎñÆ÷¶ËÊı¾İÂ·¾¶)
+	ç‰ˆæœ¬åº“è·¯å¾„(æœåŠ¡å™¨ç«¯æ•°æ®è·¯å¾„)
    -g (used with--git-post-recieve)
        count git grandpa revision
-	ÉÏÒ»´ÎÍ³¼ÆÊ±µÄ°æ±¾ºÅ
+	ä¸Šä¸€æ¬¡ç»Ÿè®¡æ—¶çš„ç‰ˆæœ¬å·
    -r (used with--git-post-recieve)
        count git revision
-	´ıÍ³¼ÆµÄ°æ±¾
+	å¾…ç»Ÿè®¡çš„ç‰ˆæœ¬
    -b (used with--git-post-recieve)
        count git branch
-	´ıÍ³¼ÆµÄ·ÖÖ§
+	å¾…ç»Ÿè®¡çš„åˆ†æ”¯
    -n (used with--git-post-recieve)
        count git repo ID
-	´ıÍ³¼ÆµÄrepo ID
+	å¾…ç»Ÿè®¡çš„repo ID
 
-¶ş¡¢Ö´ĞĞÍ³¼Æ³ÌĞò´¥·¢Í³¼Æ
+äºŒã€æ‰§è¡Œç»Ÿè®¡ç¨‹åºè§¦å‘ç»Ÿè®¡
 /gitcount/core/diffcount --git-post-recieve  -p /var/opt/gitlab/git-data/repositories/root/count-test.git -n 105 -b master -g b899a6da8a8ce9c9e5cccffa8cf9f6d827fb8760 -r c371f50fd41eaf5321c17aafc1d3b243bfe88beb
 
-×¢£º¸Ã³ÌĞò²¢²»Ê¹ÓÃgitlab×Ô´øgit¿Í»§¶Ë£¬¶øÊ¹ÓÃgit¹Ù·½¿Í»§¶Ë£¬ĞèÔÚ/usr/binÄ¿Â¼ÏÂ°²×°ÓĞgit¹Ù·½¿Í»§¶Ë¹¤¾ß¡£
+æ³¨ï¼šè¯¥ç¨‹åºå¹¶ä¸ä½¿ç”¨gitlabè‡ªå¸¦gitå®¢æˆ·ç«¯ï¼Œè€Œä½¿ç”¨gitå®˜æ–¹å®¢æˆ·ç«¯ï¼Œéœ€åœ¨/usr/binç›®å½•ä¸‹å®‰è£…æœ‰gitå®˜æ–¹å®¢æˆ·ç«¯å·¥å…·ã€‚
+
+ä¸‰ã€é¦–æ¬¡ä½¿ç”¨é…ç½®æŒ‡å—
+æ ¹æ®db.sqlå»ºç«‹æ•°æ®åº“svnadminï¼›
+ä¿®æ”¹diffcount.hé‡Œé¢æ•°æ®åº“è¿æ¥ä¿¡æ¯ï¼›
+makeæœ¬ç¨‹åº
