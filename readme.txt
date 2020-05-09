@@ -48,3 +48,11 @@ diffcount --git-post-receive –process –update –p –g –r –b -n
 根据db.sql建立数据库svnadmin；
 修改diffcount.h里面数据库连接信息；
 make本程序
+
+四、本地数据统计及其他
+使用--help命令获取更多统计方式; 
+
+特别备注：数据库不是必须的，如果不需要导入数据库，则可以使用本地统计功能；SVN的统计模式，必须依赖数据库
+编程语言：本程序的编程语言可配置，按照src/lang.h文件内的提示，增加文件即可
+
+号外：devops招聘，有意加入海康威视 devops团队的可发送简历至：qianhaiyuan@hikvision.com
