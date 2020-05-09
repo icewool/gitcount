@@ -1,0 +1,76 @@
+#-----------------------------------------------------
+# Makefile for DiffCount (CORE and CLI)
+# FOR MS WINDOWS (Use MinGW gcc compiler)
+# C.YANG  2006   Licensed under GPL
+#------------------------------------------------------
+
+DELETE = @del /f/q
+
+GNU_LIB=lib
+CORE_SRC=src
+
+CORE_LIB=$(CORE_SRC)\libdiffcount.a
+
+CLI_EXE=$(CORE_SRC)\diffcount.exe
+
+
+
+CC=gcc
+CFLAGS = -DHAVE_CONFIG_H -D_DIFFCOUNT_WIN32_ -I. -I$(GNU_LIB) -I$(CORE_SRC) -w -O2 -c 
+LFLAG = -g -O2 -o 
+AR = ar
+ARFLAG = cru
+RANLIB = ranlib
+
+
+
+#diffcount and static library objects
+GNU_OBJS = $(GNU_LIB)\basename.o $(GNU_LIB)\c-stack.o $(GNU_LIB)\cmpbuf.o $(GNU_LIB)\error.o  $(GNU_LIB)\fnmatch.o\
+           $(GNU_LIB)\exclude.o $(GNU_LIB)\exitfail.o $(GNU_LIB)\freesoft.o $(GNU_LIB)\getopt.o \
+           $(GNU_LIB)\getopt1.o $(GNU_LIB)\hard-locale.o $(GNU_LIB)\imaxtostr.o $(GNU_LIB)\offtostr.o \
+           $(GNU_LIB)\prepargs.o $(GNU_LIB)\posixver.o $(GNU_LIB)\quotesys.o $(GNU_LIB)\setmode.o \
+           $(GNU_LIB)\strftime.o $(GNU_LIB)\umaxtostr.o $(GNU_LIB)\xmalloc.o $(GNU_LIB)\xstrtoumax.o \
+	       $(GNU_LIB)\strtoumax.o $(GNU_LIB)\regex.o
+	      
+CORE_OBJS = $(CORE_SRC)\analyze.o $(CORE_SRC)\diffcount.o $(CORE_SRC)\dir.o $(CORE_SRC)\io.o \
+            $(CORE_SRC)\count.o $(CORE_SRC)\util.o $(CORE_SRC)\version.o 
+           
+EXE_OBJS = $(CORE_SRC)\cmd.o 
+
+all:$(CLI_EXE)
+
+#build final EXE
+$(CLI_EXE): $(CORE_LIB) $(EXE_OBJS)
+	$(CC) $(LFLAG) $(CLI_EXE) $(EXE_OBJS) $(CORE_LIB)
+	@echo " ----------------------------------------------------- "
+	@echo " diffcount command compiled successful in .\src"
+	@echo " libdiffcount core and head file in .\src "
+	@echo " ----------------------------------------------------- "
+
+
+
+#build static support library
+$(CORE_LIB): $(GNU_OBJS) $(CORE_OBJS)
+	$(AR) $(ARFLAG) $(CORE_LIB) $(GNU_OBJS) $(CORE_OBJS) 
+	$(RANLIB) $(CORE_LIB)
+	
+
+clean:
+	$(DELETE) $(GNU_OBJS) $(CORE_OBJS) $(EXE_OBJS) $(CORE_LIB) $(CLI_EXE)
+
+
+$(GNU_LIB)\%.o:$(GNU_LIB)\%.c
+	$(CC) $(CFLAGS) $< -o $@
+	
+$(CORE_SRC)\%.o:$(CORE_SRC)\%.c
+	$(CC) $(CFLAGS) $< -o $@
+
+
+include	make.deps.win32
+
+install:
+	@copy /y $(CLI_EXE) %WINDIR%
+	@echo " ----------------------------------------------------- "
+	@echo " diffcount command installed in %WINDIR% "
+	@echo " ----------------------------------------------------- "
+

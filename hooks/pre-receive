@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import os
+import fileinput
+import subprocess
+
+import sys
+
+
+def main():
+    # 获取repo_path
+    repo_path = os.getcwd()
+    # 校验提交的用户有效性
+    repo_id = os.environ['GL_REPOSITORY'].split('-')[1]
+    check_program = "/gitcount/core/check_author"
+    yixiu_url = "http://yixiu.hikvision.com.cn/"
+    # 获取推送前后的commitid
+    for line in fileinput.input():
+        oldrev, newrev, refname = tuple(line.split(" "))
+        empty_rev = "0"*40
+        if oldrev==empty_rev or newrev==empty_rev:
+            sys.exit(0)
+        branch = refname.split("/")[-1].strip("\n")
+        check_cmd = " ".join([check_program, newrev, repo_path])
+        os.chdir(repo_path)
+        res = subprocess.Popen(check_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
+        stdout, stderr = res.communicate()
+        return_code = res.poll()
+        if return_code==0:
+            pass
+        else:
+            print("ERROR:push blocked by pre-receive hook with output:Unrecognized author.For detais,please refer to {yixiu} !".format(yixiu=yixiu_url))
+            sys.exit(1)
+
+if __name__=="__main__":
+    main()
