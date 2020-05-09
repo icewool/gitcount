@@ -1,5 +1,5 @@
 #------------------------------------------------------
-#  This file is part of HikSvnCount.
+#  This file is part of HikGitCount.
 #  SVN Count Part developed by Haiyuan.Qian 2013
 #  Software Configuration Management of HANGZHOU HIKVISION DIGITAL TECHNOLOGY CO.,LTD. 
 #  email:qianhaiyuan@hikvision.com
